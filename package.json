@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "F1 API automated tests using Postman e Newman",
   "scripts": {
-    "test": "newman run collections/f1api.collection.json -e environments/f1api.environment.json",
-    "test:relatorio": "newman run collections/f1api.collection.json -e environments/f1api.environment.json -r cli,htmlextra --reporter-htmlextra-export relatorio.html"
+    "test": "newman run collections/f1api.postman_collection.json -e environments/f1api.environment.json",
+    "test:relatorio": "newman run collections/f1api.postman_collection.json -e environments/f1api.environment.json -r cli,htmlextra --reporter-htmlextra-export relatorio.html"
   },
   "devDependencies": {
     "newman": "^6.1.0",

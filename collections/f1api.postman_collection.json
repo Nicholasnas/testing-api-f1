@@ -1,0 +1,61 @@
+{
+	"info": {
+		"_postman_id": "adc8300b-36fb-4ec4-a9b3-09731ac0ae6d",
+		"name": "f1api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36978201"
+	},
+	"item": [
+		{
+			"name": "GET /drivers",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Validar que a requisicao foi bem sucedida",
+							"pm.test('Status deve ser 200 OK', function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test('Resposta deve ser um json', function(){",
+							"    pm.response.to.be.json;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://f1api.dev/api/drivers",
+					"protocol": "https",
+					"host": [
+						"f1api",
+						"dev"
+					],
+					"path": [
+						"api",
+						"drivers"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
