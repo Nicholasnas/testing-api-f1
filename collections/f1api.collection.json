@@ -1,0 +1,39 @@
+{
+  "info": {
+    "name": "F1 API Tests",
+    "description": "Collection of tests for the F1 API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Drivers Endpoint Test",
+      "description": "Testes para o endpoint /drivers",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/drivers",
+          "host": ["{{baseUrl}}"],
+          "path": ["drivers"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Validar que a requisicao foi bem sucedida",
+              "pm.test('Status deve ser 200 OK', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+
+              "pm.test('Resposta deve ser um json', function () {",
+              "    pm.response.to.be.json;",
+              "});"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
