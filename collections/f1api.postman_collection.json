@@ -1,0 +1,171 @@
+{
+  "info": {
+    "_postman_id": "adc8300b-36fb-4ec4-a9b3-09731ac0ae6d",
+    "name": "F1 API Tests",
+    "description": "Collection de testes para a F1 API - Inatel",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "TC-001 - Drivers Endpoint Test",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status deve ser 200 OK', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test('Resposta deve ser um json', function(){",
+              "    pm.response.to.be.json;",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/drivers",
+          "host": ["{{baseUrl}}"],
+          "path": ["drivers"]
+        }
+      }
+    },
+    {
+      "name": "TC-002 - Pesquisa de um Piloto específico",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('TC-002: Status deve ser 200 OK', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test('TC-002: Validar se retornou o Max Verstappen', function () {",
+              "    var jsonData = pm.response.json();",
+              "    var driver = jsonData.drivers.find(d => d.driverId === 'max_verstappen');",
+              "    pm.expect(driver.surname).to.eql('Verstappen');",
+              "    pm.expect(jsonData.total).to.be.at.least(1);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/drivers/search?q=verstappen",
+          "host": ["{{baseUrl}}"],
+          "path": ["drivers", "search"],
+          "query": [
+            {
+              "key": "q",
+              "value": "verstappen"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "TC-003 - Listar Temporadas Anteriores",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('TC-003: Status deve ser 200 OK', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test('TC-003: Validar se retornou as temporadas', function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.championships).to.be.an('array');",
+              "    pm.expect(jsonData.championships.length).to.be.at.least(20);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/seasons",
+          "host": ["{{baseUrl}}"],
+          "path": ["seasons"]
+        }
+      }
+    },
+    {
+      "name": "TC-011 - Buscar Temporada por Ano (Erro 404)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('TC-011: Deve retornar erro 404 para ano inválido', function () {",
+              "    pm.response.to.have.status(404);",
+              "});",
+              "pm.test('TC-011: Validar mensagem de erro', function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.message).to.include('No seasons found');",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/races/2011",
+          "host": ["{{baseUrl}}"],
+          "path": ["races", "2011"]
+        }
+      }
+    },
+    {
+      "name": "TC-012 - Pesquisar Piloto Inexistente (Erro 404)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('TC-012: Status deve ser 404', function () {",
+              "    pm.response.to.have.status(404);",
+              "});",
+              "pm.test('TC-012: Validar mensagem de erro para busca vazia', function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.message).to.eql('No drivers found.');",
+              "    pm.expect(jsonData.status).to.eql(404);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/drivers/search?q=piloto_que_nao_existe",
+          "host": ["{{baseUrl}}"],
+          "path": ["drivers", "search"],
+          "query": [
+            {
+              "key": "q",
+              "value": "piloto_que_nao_existe"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
