@@ -1,0 +1,88 @@
+{
+	"info": {
+		"_postman_id": "adc8300b-36fb-4ec4-a9b3-09731ac0ae6d",
+		"name": "F1 API Tests",
+		"description": "Collection de testes para a F1 API - Inatel",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "TC-004 - Verificando tipagem de dados do endpoint de uma equipe específica",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('TC-004: Status deve ser 200 OK', function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test('TC-004: Validar tipagem de dados', function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData.team[0].teamId).to.be.a('string');",
+							"    pm.expect(jsonData.team[0].teamName).to.be.a('string');",
+							"    pm.expect(jsonData.team[0].teamNationality).to.be.a('string');",
+							"    pm.expect(jsonData.team[0].firstAppeareance).to.be.a('number');",
+							"    pm.expect(jsonData.team[0].constructorsChampionships).to.be.a('number');",
+							"    pm.expect(jsonData.team[0].driversChampionships).to.be.a('number');",
+							"    pm.expect(jsonData.team[0].url).to.be.a('string');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/teams/ferrari",
+					"host": ["{{baseUrl}}"],
+					"path": ["teams", "ferrari"],
+					"query": [
+						{
+							"key": "q",
+							"value": "ferrari"
+						}
+					]
+				}
+			}
+		},
+		{
+			"name": "TC-005 - Verificando o endpoint de corridas de uma temporada específica",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('TC-005: Status deve ser 200 OK', function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test('TC-005: Validar se retornou corridas da temporada de 2023', function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.races).to.be.an('array');",
+							"    pm.expect(jsonData.races[0].season).to.eql('2023');",
+							"    pm.expect(jsonData.total).to.be.at.least(1);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/races/2023",
+					"host": ["{{baseUrl}}"],
+					"path": ["races", "2023"],
+					"query": [
+						{
+							"key": "season",
+							"value": "2023"
+						}
+					]
+				}
+			}
+		}
+	]
+}
