@@ -98,6 +98,69 @@
       ]
     },
     {
+      "name": "TC-004 - Pesquisa de um Piloto Especifico (Hamilton)",
+      "description": "Testes para o endpoint de pesquisa buscando Lewis Hamilton",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/drivers/search?q=hamilton",
+          "host": ["{{baseUrl}}"],
+          "path": ["drivers", "search"],
+          "query": [{ "key": "q", "value": "hamilton" }]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('TC-004: Status deve ser 200 OK', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test('TC-004: Validar se retornou Lewis Hamilton', function () {",
+              "    var jsonData = pm.response.json();",
+              "    var driver = jsonData.drivers.find(d => d.surname === 'Hamilton');",
+              "    pm.expect(driver).to.not.be.undefined;",
+              "    pm.expect(driver.surname).to.eql('Hamilton');",
+              "    pm.expect(jsonData.total).to.be.at.least(1);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "TC-005 - Listar Circuitos",
+      "description": "Testes para o endpoint /circuits",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/circuits",
+          "host": ["{{baseUrl}}"],
+          "path": ["circuits"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('TC-005: Status deve ser 200 OK', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test('TC-005: Validar se retornou lista de circuitos', function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.circuits).to.be.an('array');",
+              "    pm.expect(jsonData.circuits.length).to.be.at.least(10);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
       "name": "TC-011 - Buscar Temporada por Ano (funcionalidade inexistente)",
       "description": "Testes para o endpoint /seasons com /{ano}",
       "request": {
@@ -150,6 +213,65 @@
               "pm.test('TC-012: Validar mensagem de erro para busca vazia', function () {",
               "    var jsonData = pm.response.json();",
               "    pm.expect(jsonData.message).to.eql('No drivers found.');",
+              "    pm.expect(jsonData.status).to.eql(404);",
+              "});"
+            ]
+          }
+        }
+      ]
+    }
+    ,
+    {
+      "name": "TC-013 - Buscar Corridas de Ano Invalido (1800)",
+      "description": "Testes para o endpoint /races com ano inexistente na F1",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/races/1800",
+          "host": ["{{baseUrl}}"],
+          "path": ["races", "1800"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('TC-013: Deve retornar erro 404 para ano invalido', function () {",
+              "    pm.response.to.have.status(404);",
+              "});",
+              "pm.test('TC-013: Validar status de erro na resposta', function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.status).to.eql(404);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "TC-014 - Buscar Circuito Inexistente",
+      "description": "Testes para o endpoint /circuits com ID invalido",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/circuits/circuito_invalido_xyz",
+          "host": ["{{baseUrl}}"],
+          "path": ["circuits", "circuito_invalido_xyz"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('TC-014: Deve retornar erro 404 para circuito inexistente', function () {",
+              "    pm.response.to.have.status(404);",
+              "});",
+              "pm.test('TC-014: Validar status de erro na resposta', function () {",
+              "    var jsonData = pm.response.json();",
               "    pm.expect(jsonData.status).to.eql(404);",
               "});"
             ]
