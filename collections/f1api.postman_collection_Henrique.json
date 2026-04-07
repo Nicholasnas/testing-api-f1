@@ -131,7 +131,7 @@
           "path": ["drivers", "search"],
           "query": [
             {
-              A	"key": "q",
+              "key": "q",
               "value": "piloto_que_nao_existe"
             }
           ]
