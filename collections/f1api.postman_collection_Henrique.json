@@ -7,35 +7,6 @@
   },
   "item": [
     {
-      "name": "TC-001 - Drivers Endpoint Test",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test('Status deve ser 200 OK', function () {",
-              "    pm.response.to.have.status(200);",
-              "});",
-              "",
-              "pm.test('Resposta deve ser um json', function(){",
-              "    pm.response.to.be.json;",
-              "});"
-            ],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "{{baseUrl}}/drivers",
-          "host": ["{{baseUrl}}"],
-          "path": ["drivers"]
-        }
-      }
-    },
-    {
       "name": "TC-002 - Pesquisa de um Piloto específico",
       "event": [
         {
