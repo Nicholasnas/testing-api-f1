@@ -16,8 +16,12 @@
 							"pm.test('TC-004: Status deve ser 200 OK', function () {",
 							"    pm.response.to.have.status(200);",
 							"});",
+							"pm.test('Resposta deve ser um json', function(){",
+							"    pm.response.to.be.json;",
+							"});",
 							"pm.test('TC-004: Validar tipagem de dados', function () {",
 							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData.team).to.be.an('array');",
 							"    pm.expect(jsonData.team[0].teamId).to.be.a('string');",
 							"    pm.expect(jsonData.team[0].teamName).to.be.a('string');",
 							"    pm.expect(jsonData.team[0].teamNationality).to.be.a('string');",
@@ -57,10 +61,13 @@
 							"pm.test('TC-005: Status deve ser 200 OK', function () {",
 							"    pm.response.to.have.status(200);",
 							"});",
+							"pm.test('Resposta deve ser um json', function(){",
+							"    pm.response.to.be.json;",
+							"});",
 							"pm.test('TC-005: Validar se retornou corridas da temporada de 2023', function () {",
 							"    var jsonData = pm.response.json();",
 							"    pm.expect(jsonData.races).to.be.an('array');",
-							"    pm.expect(jsonData.races[0].season).to.eql('2023');",
+							"    pm.expect(jsonData.races[0].championshipId).to.eql('f1_2023');",
 							"    pm.expect(jsonData.total).to.be.at.least(1);",
 							"});"
 						],
@@ -72,15 +79,65 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/races/2023",
+					"raw": "{{baseUrl}}/2023",
 					"host": ["{{baseUrl}}"],
-					"path": ["races", "2023"],
-					"query": [
-						{
-							"key": "season",
-							"value": "2023"
-						}
-					]
+					"path": ["2023"]
+				}
+			}
+		},
+		{
+			"name": "TC-017 - Verificando equipe inexistente no endpoint de uma equipe específica",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('TC-017: Status deve ser 404 Not Found', function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"pm.test('Resposta deve ser um json', function(){",
+							"    pm.response.to.be.json;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/teams/inexistente",
+					"host": ["{{baseUrl}}"],
+					"path": ["teams", "inexistente"]
+				}
+			}
+		},
+		{
+			"name": "TC-018 - Verificando comportamento do endpoint de corridas para uma temporada inválida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('TC-018: Status deve ser 404 Not Found', function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"pm.test('Resposta deve ser um json', function(){",
+							"    pm.response.to.be.json;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/9999",
+					"host": ["{{baseUrl}}"],
+					"path": ["9999"]
 				}
 			}
 		}
