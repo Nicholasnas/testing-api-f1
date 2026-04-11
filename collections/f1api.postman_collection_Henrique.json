@@ -37,6 +37,12 @@
               "    const jos = jsonData.drivers.find(d => d.name === 'Jos');",
               "    pm.expect(jos.driverId).to.be.a('string');",
               "    pm.expect(jos.number).to.be.null; // Valida que a API trata nulos corretamente",
+              "});",
+              "pm.test('TC-002: Validar se retornou Max/Jos Verstappen', () => {",
+              "    const jsonData = pm.response.json();",
+              "    const driver = jsonData.drivers.find(d => d.surname === 'Verstappen');",
+              "    pm.expect(driver).to.not.be.undefined;",
+              "    pm.expect(driver.surname).to.eql('Verstappen');",
               "});"
             ]
           }
@@ -83,9 +89,9 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{baseUrl}}/1800/drivers",
+          "raw": "{{baseUrl}}/1886/drivers",
           "host": ["{{baseUrl}}"],
-          "path": ["1800", "drivers"]
+          "path": ["1886", "drivers"]
         }
       },
       "event": [
