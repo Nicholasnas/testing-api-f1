@@ -1,157 +1,157 @@
 {
-  "info": {
-    "_postman_id": "f2a1c3e5-7b8d-4e2a-9f6c-1d3b5e7a9c0d",
-    "name": "Otavio Augusto - Testes",
-    "description": "Collection individual de testes realizados por Otavio Augusto Lima para a F1 API - Inatel.",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-  },
-  "variable": [
-    {
-      "key": "baseUrl",
-      "value": "https://f1-api-inatel.vercel.app/api",
-      "type": "string"
-    }
-  ],
-  "item": [
-    {
-      "name": "Testes de Sucesso (2xx)",
-      "item": [
-        {
-          "name": "TC-006 - Pesquisa de um Piloto Especifico (Hamilton)",
-          "description": "Valida que a busca por 'hamilton' retorna status 200 e que Lewis Hamilton está presente nos resultados, confirmando nome e que o total de resultados é ao menos 1.",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test('TC-004: Status deve ser 200 OK', function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});",
-                  "pm.test('TC-004: Validar se retornou Lewis Hamilton', function () {",
-                  "    var jsonData = pm.response.json();",
-                  "    var driver = jsonData.drivers.find(d => d.surname === 'Hamilton');",
-                  "    pm.expect(driver).to.not.be.undefined;",
-                  "    pm.expect(driver.surname).to.eql('Hamilton');",
-                  "    pm.expect(jsonData.total).to.be.at.least(1);",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/drivers/search?q=hamilton",
-              "host": ["{{baseUrl}}"],
-              "path": ["drivers", "search"],
-              "query": [
-                {
-                  "key": "q",
-                  "value": "hamilton"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "name": "TC-007 - Listar Circuitos",
-          "description": "Valida que o endpoint de circuitos retorna status 200 e que a lista contém ao menos 10 circuitos cadastrados na API.",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test('TC-005: Status deve ser 200 OK', function () {",
-                  "    pm.response.to.have.status(200);",
-                  "});",
-                  "pm.test('TC-005: Validar se retornou lista de circuitos', function () {",
-                  "    var jsonData = pm.response.json();",
-                  "    pm.expect(jsonData.circuits).to.be.an('array');",
-                  "    pm.expect(jsonData.circuits.length).to.be.at.least(10);",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/circuits",
-              "host": ["{{baseUrl}}"],
-              "path": ["circuits"]
-            }
-          }
-        }
-      ]
-    },
-    {
-      "name": "Testes de Erro (4xx)",
-      "item": [
-        {
-          "name": "TC-013 - Buscar Corridas de Ano Invalido (1800)",
-          "description": "Valida que ao buscar corridas do ano 1800 (inexistente na F1) a API retorna status 404 e que o campo 'status' no corpo da resposta também é 404.",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test('TC-013: Deve retornar erro 404 para ano invalido', function () {",
-                  "    pm.response.to.have.status(404);",
-                  "});",
-                  "pm.test('TC-013: Validar status de erro na resposta', function () {",
-                  "    var jsonData = pm.response.json();",
-                  "    pm.expect(jsonData.status).to.eql(404);",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/races/1800",
-              "host": ["{{baseUrl}}"],
-              "path": ["races", "1800"]
-            }
-          }
-        },
-        {
-          "name": "TC-014 - Buscar Circuito Inexistente",
-          "description": "Valida que ao buscar um circuito com ID inválido ('circuito_invalido_xyz') a API retorna status 404 e que o campo 'status' no corpo da resposta também é 404.",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test('TC-014: Deve retornar erro 404 para circuito inexistente', function () {",
-                  "    pm.response.to.have.status(404);",
-                  "});",
-                  "pm.test('TC-014: Validar status de erro na resposta', function () {",
-                  "    var jsonData = pm.response.json();",
-                  "    pm.expect(jsonData.status).to.eql(404);",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/circuits/circuito_invalido_xyz",
-              "host": ["{{baseUrl}}"],
-              "path": ["circuits", "circuito_invalido_xyz"]
-            }
-          }
-        }
-      ]
-    }
-  ]
+	"info": {
+		"_postman_id": "f2a1c3e5-7b8d-4e2a-9f6c-1d3b5e7a9c0d",
+		"name": "Otavio Augusto - Testes",
+		"description": "Collection individual de testes realizados por Otavio Augusto Lima para a F1 API - Inatel.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://f1-api-inatel.vercel.app/api",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "Testes de Sucesso (2xx)",
+			"item": [
+				{
+					"name": "TC-006 - Pesquisa de um Piloto Especifico (Hamilton)",
+					"description": "Valida que a busca por 'hamilton' retorna status 200 e que Lewis Hamilton está presente nos resultados, confirmando nome e que o total de resultados é ao menos 1.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('TC-006: Status deve ser 200 OK', function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test('TC-006: Validar se retornou Lewis Hamilton', function () {",
+									"    var jsonData = pm.response.json();",
+									"    var driver = jsonData.drivers.find(d => d.surname === 'Hamilton');",
+									"    pm.expect(driver).to.not.be.undefined;",
+									"    pm.expect(driver.surname).to.eql('Hamilton');",
+									"    pm.expect(jsonData.total).to.be.at.least(1);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/drivers/search?q=hamilton",
+							"host": ["{{baseUrl}}"],
+							"path": ["drivers", "search"],
+							"query": [
+								{
+									"key": "q",
+									"value": "hamilton"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "TC-007 - Listar Circuitos",
+					"description": "Valida que o endpoint de circuitos retorna status 200 e que a lista contém ao menos 10 circuitos cadastrados na API.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('TC-007: Status deve ser 200 OK', function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test('TC-007: Validar se retornou lista de circuitos', function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.circuits).to.be.an('array');",
+									"    pm.expect(jsonData.circuits.length).to.be.at.least(10);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/circuits",
+							"host": ["{{baseUrl}}"],
+							"path": ["circuits"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Testes de Erro (4xx)",
+			"item": [
+				{
+					"name": "TC-013 - Buscar Corridas de Ano Invalido (1800)",
+					"description": "Valida que ao buscar corridas do ano 1800 (inexistente na F1) a API retorna status 404 e que o campo 'status' no corpo da resposta também é 404.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('TC-013: Deve retornar erro 404 para ano invalido', function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"pm.test('TC-013: Validar status de erro na resposta', function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.status).to.eql(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/races/1800",
+							"host": ["{{baseUrl}}"],
+							"path": ["races", "1800"]
+						}
+					}
+				},
+				{
+					"name": "TC-014 - Buscar Circuito Inexistente",
+					"description": "Valida que ao buscar um circuito com ID inválido ('circuito_invalido_xyz') a API retorna status 404 e que o campo 'status' no corpo da resposta também é 404.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('TC-014: Deve retornar erro 404 para circuito inexistente', function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"pm.test('TC-014: Validar status de erro na resposta', function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.status).to.eql(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/circuits/circuito_invalido_xyz",
+							"host": ["{{baseUrl}}"],
+							"path": ["circuits", "circuito_invalido_xyz"]
+						}
+					}
+				}
+			]
+		}
+	]
 }
