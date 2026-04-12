@@ -19,6 +19,18 @@ jobs:
 
       - name: Instalar dependências
         run: npm install
-    
-      - name: Gerar relatório de testes
+
+      - name: Executar testes individuais (Fail-Fast)
+        run: npm run test:dev
+
+      - name: Gerar Relatório Unificado HTML
+        if: always()
         run: npm run test:relatorio
+
+      - name: Salvar Relatório como Artefato
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Relatorio-Testes-F1
+          path: relatorio.html
+          retention-days: 7
