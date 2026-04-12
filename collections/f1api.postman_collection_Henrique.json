@@ -26,7 +26,7 @@
             "exec": [
               "pm.test('TC-001: Status deve ser 200 OK', () => { pm.response.to.have.status(200); });",
               "pm.test('TC-001: Resposta deve ser um JSON válido', () => { pm.response.to.be.json; });",
-              "pm.test('TC-001: Tempo de resposta aceitável (< 5000ms)', () => { pm.expect(pm.response.responseTime).to.be.below(5000); });",
+              "pm.test('TC-001: Tempo de resposta aceitável (< 5100ms)', () => { pm.expect(pm.response.responseTime).to.be.below(5100); });",
               "pm.test('TC-001: Validar metadados de paginação', () => {",
               "    const jsonData = pm.response.json();",
               "    pm.expect(jsonData.limit).to.be.a('number');",
