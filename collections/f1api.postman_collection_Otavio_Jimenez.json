@@ -10,7 +10,7 @@
       "name": "Testes de Sucesso (2xx)",
       "item": [
         {
-          "name": "TC-006 - Listar pilotos da temporada 2024",
+          "name": "TC-008 - Listar pilotos da temporada 2024",
           "description": "Valida que o endpoint de pilotos por temporada retorna status 200, uma lista de pilotos e inclui Max Verstappen na temporada de 2024.",
           "event": [
             {
@@ -18,11 +18,11 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('TC-006: Status deve ser 200 OK', function () {",
+                  "pm.test('TC-008: Status deve ser 200 OK', function () {",
                   "  pm.response.to.have.status(200);",
                   "});",
                   "",
-                  "pm.test('TC-006: Validar pilotos da temporada 2024', function () {",
+                  "pm.test('TC-008: Validar pilotos da temporada 2024', function () {",
                   "  const jsonData = pm.response.json();",
                   "  pm.expect(jsonData.drivers).to.be.an('array');",
                   "  pm.expect(jsonData.drivers.length).to.be.at.least(20);",
@@ -44,7 +44,7 @@
           }
         },
         {
-          "name": "TC-007 - Listar circuitos da temporada 2024",
+          "name": "TC-009 - Listar circuitos da temporada 2024",
           "description": "Valida que o endpoint de circuitos por temporada retorna status 200, uma lista de circuitos e inclui Monaco na temporada de 2024.",
           "event": [
             {
@@ -52,11 +52,11 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('TC-007: Status deve ser 200 OK', function () {",
+                  "pm.test('TC-009: Status deve ser 200 OK', function () {",
                   "  pm.response.to.have.status(200);",
                   "});",
                   "",
-                  "pm.test('TC-007: Validar circuitos da temporada 2024', function () {",
+                  "pm.test('TC-009: Validar circuitos da temporada 2024', function () {",
                   "  const jsonData = pm.response.json();",
                   "  pm.expect(jsonData.circuits).to.be.an('array');",
                   "  pm.expect(jsonData.circuits.length).to.be.at.least(20);",
