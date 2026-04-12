@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(wc -l /c/Users/otavi/Downloads/testing-api-f1/collections/*.json)",
-      "Bash(npm test:*)"
-    ]
-  }
-}
