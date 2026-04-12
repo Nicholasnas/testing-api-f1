@@ -5,7 +5,8 @@ const arquivos = [
     './collections/f1api.postman_collection_Douglas.json',
     './collections/f1api.postman_collection_Henrique.json',
     './collections/f1api.postman_collection_Otavio_Jimenez.json',
-    './collections/f1api.postman_collection_Otavio_Augusto.json'
+    './collections/f1api.postman_collection_Otavio_Augusto.json',
+    './collections/f1.api.postman_collection_Nicholas.json'
 ];
 
 let todosOsTestes = [];

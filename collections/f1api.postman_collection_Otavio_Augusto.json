@@ -14,17 +14,17 @@
   ],
   "item": [
     {
-      "name": "TC-006 - Listar Pilotos da Temporada Atual",
+      "name": "TC-009 - Listar Pilotos da Temporada Atual",
       "description": "Valida que o endpoint de pilotos da temporada atual retorna status 200 e que a resposta contém uma lista de pilotos com ao menos 1 piloto cadastrado.",
       "event": [
         {
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test('TC-006: Status deve ser 200 OK', function () {",
+              "pm.test('TC-009: Status deve ser 200 OK', function () {",
               "    pm.response.to.have.status(200);",
               "});",
-              "pm.test('TC-006: Validar se retornou lista de pilotos da temporada atual', function () {",
+              "pm.test('TC-009: Validar se retornou lista de pilotos da temporada atual', function () {",
               "    var jsonData = pm.response.json();",
               "    pm.expect(jsonData).to.be.an('object');",
               "    pm.expect(jsonData.drivers).to.be.an('array');",
@@ -54,17 +54,17 @@
       }
     },
     {
-      "name": "TC-007 - Listar Circuitos",
+      "name": "TC-010 - Listar Circuitos",
       "description": "Valida que o endpoint de circuitos retorna status 200 e que a lista contém ao menos 10 circuitos cadastrados na API.",
       "event": [
         {
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test('TC-007: Status deve ser 200 OK', function () {",
+              "pm.test('TC-010: Status deve ser 200 OK', function () {",
               "    pm.response.to.have.status(200);",
               "});",
-              "pm.test('TC-007: Validar se retornou lista de circuitos', function () {",
+              "pm.test('TC-010: Validar se retornou lista de circuitos', function () {",
               "    var jsonData = pm.response.json();",
               "    pm.expect(jsonData.circuits).to.be.an('array');",
               "    pm.expect(jsonData.circuits.length).to.be.at.least(10);",
@@ -89,17 +89,17 @@
       }
     },
     {
-      "name": "TC-013 - Buscar Corridas de Ano Invalido (1800)",
+      "name": "TC-019 - Buscar Corridas de Ano Invalido (1800)",
       "description": "Valida que ao buscar corridas do ano 1800 (inexistente na F1) a API retorna status 404 e que o campo 'status' no corpo da resposta também é 404.",
       "event": [
         {
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test('TC-013: Deve retornar erro 404 para ano invalido', function () {",
+              "pm.test('TC-019: Deve retornar erro 404 para ano invalido', function () {",
               "    pm.response.to.have.status(404);",
               "});",
-              "pm.test('TC-013: Validar status de erro na resposta', function () {",
+              "pm.test('TC-019: Validar status de erro na resposta', function () {",
               "    var jsonData = pm.response.json();",
               "    pm.expect(jsonData.status).to.eql(404);",
               "});"
@@ -124,17 +124,17 @@
       }
     },
     {
-      "name": "TC-014 - Buscar Circuito Inexistente",
+      "name": "TC-020 - Buscar Circuito Inexistente",
       "description": "Valida que ao buscar um circuito com ID inválido ('circuito_invalido_xyz') a API retorna status 404 e que o campo 'status' no corpo da resposta também é 404.",
       "event": [
         {
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test('TC-014: Deve retornar erro 404 para circuito inexistente', function () {",
+              "pm.test('TC-020: Deve retornar erro 404 para circuito inexistente', function () {",
               "    pm.response.to.have.status(404);",
               "});",
-              "pm.test('TC-014: Validar status de erro na resposta', function () {",
+              "pm.test('TC-020: Validar status de erro na resposta', function () {",
               "    var jsonData = pm.response.json();",
               "    pm.expect(jsonData.status).to.eql(404);",
               "});"

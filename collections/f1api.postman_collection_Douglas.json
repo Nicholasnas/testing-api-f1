@@ -7,20 +7,20 @@
   },
   "item": [
     {
-      "name": "TC-004 - Verificando tipagem de dados do endpoint de uma equipe específica",
+      "name": "TC-003 - Verificando tipagem de dados do endpoint de uma equipe específica",
       "event": [
         {
           "listen": "test",
           "script": {
             "type": "text/javascript",
             "exec": [
-              "pm.test('TC-004: Status deve ser 200 OK', function () {",
+              "pm.test('TC-003: Status deve ser 200 OK', function () {",
               "    pm.response.to.have.status(200);",
               "});",
               "pm.test('Resposta deve ser um json', function(){",
               "    pm.response.to.be.json;",
               "});",
-              "pm.test('TC-004: Validar tipagem de dados', function () {",
+              "pm.test('TC-003: Validar tipagem de dados', function () {",
               "    const jsonData = pm.response.json();",
               "    pm.expect(jsonData.team).to.be.an('array');",
               "    pm.expect(jsonData.team[0].teamId).to.be.a('string');",
@@ -52,20 +52,20 @@
       }
     },
     {
-      "name": "TC-005 - Verificando o endpoint de corridas de uma temporada específica",
+      "name": "TC-004 - Verificando o endpoint de corridas de uma temporada específica",
       "event": [
         {
           "listen": "test",
           "script": {
             "type": "text/javascript",
             "exec": [
-              "pm.test('TC-005: Status deve ser 200 OK', function () {",
+              "pm.test('TC-004: Status deve ser 200 OK', function () {",
               "    pm.response.to.have.status(200);",
               "});",
               "pm.test('Resposta deve ser um json', function(){",
               "    pm.response.to.be.json;",
               "});",
-              "pm.test('TC-005: Validar se retornou corridas da temporada de 2023', function () {",
+              "pm.test('TC-004: Validar se retornou corridas da temporada de 2023', function () {",
               "    var jsonData = pm.response.json();",
               "    pm.expect(jsonData.races).to.be.an('array');",
               "    pm.expect(jsonData.races[0].championshipId).to.eql('f1_2023');",
@@ -86,14 +86,14 @@
       }
     },
     {
-      "name": "TC-017 - Verificando equipe inexistente no endpoint de uma equipe específica",
+      "name": "TC-013 - Verificando equipe inexistente no endpoint de uma equipe específica",
       "event": [
         {
           "listen": "test",
           "script": {
             "type": "text/javascript",
             "exec": [
-              "pm.test('TC-017: Status deve ser 404 Not Found', function () {",
+              "pm.test('TC-013: Status deve ser 404 Not Found', function () {",
               "    pm.response.to.have.status(404);",
               "});",
               "pm.test('Resposta deve ser um json', function(){",
@@ -114,14 +114,14 @@
       }
     },
     {
-      "name": "TC-018 - Verificando comportamento do endpoint de corridas para uma temporada inválida",
+      "name": "TC-014 - Verificando comportamento do endpoint de corridas para uma temporada inválida",
       "event": [
         {
           "listen": "test",
           "script": {
             "type": "text/javascript",
             "exec": [
-              "pm.test('TC-018: Status deve ser 404 Not Found', function () {",
+              "pm.test('TC-014: Status deve ser 404 Not Found', function () {",
               "    pm.response.to.have.status(404);",
               "});",
               "pm.test('Resposta deve ser um json', function(){",

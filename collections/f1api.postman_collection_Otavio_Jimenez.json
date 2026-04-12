@@ -7,7 +7,7 @@
   },
   "item": [
     {
-      "name": "TC-008 - Listar pilotos da temporada 2024",
+      "name": "TC-007 - Listar pilotos da temporada 2024",
       "description": "Valida que o endpoint de pilotos por temporada retorna status 200, uma lista de pilotos e inclui Max Verstappen na temporada de 2024.",
       "event": [
         {
@@ -15,11 +15,11 @@
           "script": {
             "type": "text/javascript",
             "exec": [
-              "pm.test('TC-008: Status deve ser 200 OK', function () {",
+              "pm.test('TC-007: Status deve ser 200 OK', function () {",
               "  pm.response.to.have.status(200);",
               "});",
               "",
-              "pm.test('TC-008: Validar pilotos da temporada 2024', function () {",
+              "pm.test('TC-007: Validar pilotos da temporada 2024', function () {",
               "  const jsonData = pm.response.json();",
               "  pm.expect(jsonData.drivers).to.be.an('array');",
               "  pm.expect(jsonData.drivers.length).to.be.at.least(20);",
@@ -41,7 +41,7 @@
       }
     },
     {
-      "name": "TC-009 - Listar circuitos da temporada 2024",
+      "name": "TC-008 - Listar circuitos da temporada 2024",
       "description": "Valida que o endpoint de circuitos por temporada retorna status 200, uma lista de circuitos e inclui Monaco na temporada de 2024.",
       "event": [
         {
@@ -49,11 +49,11 @@
           "script": {
             "type": "text/javascript",
             "exec": [
-              "pm.test('TC-009: Status deve ser 200 OK', function () {",
+              "pm.test('TC-008: Status deve ser 200 OK', function () {",
               "  pm.response.to.have.status(200);",
               "});",
               "",
-              "pm.test('TC-009: Validar circuitos da temporada 2024', function () {",
+              "pm.test('TC-008: Validar circuitos da temporada 2024', function () {",
               "  const jsonData = pm.response.json();",
               "  pm.expect(jsonData.circuits).to.be.an('array');",
               "  pm.expect(jsonData.circuits.length).to.be.at.least(20);",
@@ -75,7 +75,7 @@
       }
     },
     {
-      "name": "TC-015 - Buscar piloto inexistente por ID",
+      "name": "TC-017 - Buscar piloto inexistente por ID",
       "description": "Valida que ao buscar um piloto com ID inexistente a API retorna 404 e um corpo de erro consistente.",
       "event": [
         {
@@ -83,11 +83,11 @@
           "script": {
             "type": "text/javascript",
             "exec": [
-              "pm.test('TC-015: Deve retornar erro 404 para piloto inexistente', function () {",
+              "pm.test('TC-017: Deve retornar erro 404 para piloto inexistente', function () {",
               "  pm.response.to.have.status(404);",
               "});",
               "",
-              "pm.test('TC-015: Validar corpo de erro', function () {",
+              "pm.test('TC-017: Validar corpo de erro', function () {",
               "  const jsonData = pm.response.json();",
               "  pm.expect(jsonData.status).to.eql(404);",
               "  pm.expect(jsonData.message).to.exist;",
@@ -107,7 +107,7 @@
       }
     },
     {
-      "name": "TC-016 - Buscar equipe inexistente por ID",
+      "name": "TC-018 - Buscar equipe inexistente por ID",
       "description": "Valida que ao buscar uma equipe com ID inexistente a API retorna 404 e um corpo de erro consistente.",
       "event": [
         {
@@ -115,11 +115,11 @@
           "script": {
             "type": "text/javascript",
             "exec": [
-              "pm.test('TC-016: Deve retornar erro 404 para equipe inexistente', function () {",
+              "pm.test('TC-018: Deve retornar erro 404 para equipe inexistente', function () {",
               "  pm.response.to.have.status(404);",
               "});",
               "",
-              "pm.test('TC-016: Validar corpo de erro', function () {",
+              "pm.test('TC-018: Validar corpo de erro', function () {",
               "  const jsonData = pm.response.json();",
               "  pm.expect(jsonData.status).to.eql(404);",
               "  pm.expect(jsonData.message).to.exist;",

@@ -7,7 +7,7 @@
   },
   "item": [
     {
-      "name": "TC-002 - Pesquisa de Piloto (Validação de Metadados e Tipagem)",
+      "name": "TC-001 - Pesquisa de Piloto (Validação de Metadados e Tipagem)",
       "request": {
         "method": "GET",
         "header": [],
@@ -24,21 +24,21 @@
           "script": {
             "type": "text/javascript",
             "exec": [
-              "pm.test('TC-002: Status deve ser 200 OK', () => { pm.response.to.have.status(200); });",
-              "pm.test('TC-002: Resposta deve ser um JSON válido', () => { pm.response.to.be.json; });",
-              "pm.test('TC-002: Tempo de resposta aceitável (< 5000ms)', () => { pm.expect(pm.response.responseTime).to.be.below(5000); });",
-              "pm.test('TC-002: Validar metadados de paginação', () => {",
+              "pm.test('TC-001: Status deve ser 200 OK', () => { pm.response.to.have.status(200); });",
+              "pm.test('TC-001: Resposta deve ser um JSON válido', () => { pm.response.to.be.json; });",
+              "pm.test('TC-001: Tempo de resposta aceitável (< 5000ms)', () => { pm.expect(pm.response.responseTime).to.be.below(5000); });",
+              "pm.test('TC-001: Validar metadados de paginação', () => {",
               "    const jsonData = pm.response.json();",
               "    pm.expect(jsonData.limit).to.be.a('number');",
               "    pm.expect(jsonData.total).to.eql(2); // Max e Jos Verstappen",
               "});",
-              "pm.test('TC-002: Validar tipos de dados e permissão de valores nulos', () => {",
+              "pm.test('TC-001: Validar tipos de dados e permissão de valores nulos', () => {",
               "    const jsonData = pm.response.json();",
               "    const jos = jsonData.drivers.find(d => d.name === 'Jos');",
               "    pm.expect(jos.driverId).to.be.a('string');",
               "    pm.expect(jos.number).to.be.null; // Valida que a API trata nulos corretamente",
               "});",
-              "pm.test('TC-002: Validar se retornou Max/Jos Verstappen', () => {",
+              "pm.test('TC-001: Validar se retornou Max/Jos Verstappen', () => {",
               "    const jsonData = pm.response.json();",
               "    const driver = jsonData.drivers.find(d => d.surname === 'Verstappen');",
               "    pm.expect(driver).to.not.be.undefined;",
@@ -50,7 +50,7 @@
       ]
     },
     {
-      "name": "TC-003 - Listar Temporadas (Validação de Ordenação e Regex)",
+      "name": "TC-002 - Listar Temporadas (Validação de Ordenação e Regex)",
       "request": {
         "method": "GET",
         "header": [],
@@ -66,13 +66,13 @@
           "script": {
             "type": "text/javascript",
             "exec": [
-              "pm.test('TC-003: Status deve ser 200 OK', () => { pm.response.to.have.status(200); });",
-              "pm.test('TC-003: Resposta deve ser um JSON válido', () => { pm.response.to.be.json; });",
-              "pm.test('TC-003: Validar formato do campeonato via Regex', () => {",
+              "pm.test('TC-002: Status deve ser 200 OK', () => { pm.response.to.have.status(200); });",
+              "pm.test('TC-002: Resposta deve ser um JSON válido', () => { pm.response.to.be.json; });",
+              "pm.test('TC-002: Validar formato do campeonato via Regex', () => {",
               "    const jsonData = pm.response.json();",
               "    pm.expect(jsonData.championships[0].championshipId).to.match(/^f1_\\d{4}$/);",
               "});",
-              "pm.test('TC-003: Validar regra de negócio - Ordenação decrescente', () => {",
+              "pm.test('TC-002: Validar regra de negócio - Ordenação decrescente', () => {",
               "    const jsonData = pm.response.json();",
               "    const anoMaisRecente = jsonData.championships[0].year;",
               "    const anoAnterior = jsonData.championships[1].year;",
