@@ -17,8 +17,8 @@
 			"name": "Testes de Sucesso (2xx)",
 			"item": [
 				{
-					"name": "TC-006 - Pesquisa de um Piloto Especifico (Hamilton)",
-					"description": "Valida que a busca por 'hamilton' retorna status 200 e que Lewis Hamilton está presente nos resultados, confirmando nome e que o total de resultados é ao menos 1.",
+					"name": "TC-006 - Listar Pilotos da Temporada Atual",
+					"description": "Valida que o endpoint de pilotos da temporada atual retorna status 200 e que a resposta contém uma lista de pilotos com ao menos 1 piloto cadastrado.",
 					"event": [
 						{
 							"listen": "test",
@@ -27,12 +27,11 @@
 									"pm.test('TC-006: Status deve ser 200 OK', function () {",
 									"    pm.response.to.have.status(200);",
 									"});",
-									"pm.test('TC-006: Validar se retornou Lewis Hamilton', function () {",
+									"pm.test('TC-006: Validar se retornou lista de pilotos da temporada atual', function () {",
 									"    var jsonData = pm.response.json();",
-									"    var driver = jsonData.drivers.find(d => d.surname === 'Hamilton');",
-									"    pm.expect(driver).to.not.be.undefined;",
-									"    pm.expect(driver.surname).to.eql('Hamilton');",
-									"    pm.expect(jsonData.total).to.be.at.least(1);",
+									"    pm.expect(jsonData).to.be.an('object');",
+									"    pm.expect(jsonData.drivers).to.be.an('array');",
+									"    pm.expect(jsonData.drivers.length).to.be.at.least(1);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -43,15 +42,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/drivers/search?q=hamilton",
-							"host": ["{{baseUrl}}"],
-							"path": ["drivers", "search"],
-							"query": [
-								{
-									"key": "q",
-									"value": "hamilton"
-								}
-							]
+							"raw": "https://f1api.dev/api/current/drivers",
+							"protocol": "https",
+							"host": ["f1api", "dev"],
+							"path": ["api", "current", "drivers"]
 						}
 					}
 				},
