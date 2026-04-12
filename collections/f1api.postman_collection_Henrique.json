@@ -1,0 +1,150 @@
+{
+  "info": {
+    "_postman_id": "adc8300b-36fb-4ec4-a9b3-09731ac0ae6d",
+    "name": "F1 API Tests",
+    "description": "Collection de testes para a F1 API - Inatel",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "TC-002 - Pesquisa de Piloto (Validação de Metadados e Tipagem)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/drivers/search?q=verstappen",
+          "host": ["{{baseUrl}}"],
+          "path": ["drivers", "search"],
+          "query": [{ "key": "q", "value": "verstappen" }]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('TC-002: Status deve ser 200 OK', () => { pm.response.to.have.status(200); });",
+              "pm.test('TC-002: Resposta deve ser um JSON válido', () => { pm.response.to.be.json; });",
+              "pm.test('TC-002: Tempo de resposta aceitável (< 5000ms)', () => { pm.expect(pm.response.responseTime).to.be.below(5000); });",
+              "pm.test('TC-002: Validar metadados de paginação', () => {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.limit).to.be.a('number');",
+              "    pm.expect(jsonData.total).to.eql(2); // Max e Jos Verstappen",
+              "});",
+              "pm.test('TC-002: Validar tipos de dados e permissão de valores nulos', () => {",
+              "    const jsonData = pm.response.json();",
+              "    const jos = jsonData.drivers.find(d => d.name === 'Jos');",
+              "    pm.expect(jos.driverId).to.be.a('string');",
+              "    pm.expect(jos.number).to.be.null; // Valida que a API trata nulos corretamente",
+              "});",
+              "pm.test('TC-002: Validar se retornou Max/Jos Verstappen', () => {",
+              "    const jsonData = pm.response.json();",
+              "    const driver = jsonData.drivers.find(d => d.surname === 'Verstappen');",
+              "    pm.expect(driver).to.not.be.undefined;",
+              "    pm.expect(driver.surname).to.eql('Verstappen');",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "TC-003 - Listar Temporadas (Validação de Ordenação e Regex)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/seasons",
+          "host": ["{{baseUrl}}"],
+          "path": ["seasons"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('TC-003: Status deve ser 200 OK', () => { pm.response.to.have.status(200); });",
+              "pm.test('TC-003: Resposta deve ser um JSON válido', () => { pm.response.to.be.json; });",
+              "pm.test('TC-003: Validar formato do campeonato via Regex', () => {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.championships[0].championshipId).to.match(/^f1_\\d{4}$/);",
+              "});",
+              "pm.test('TC-003: Validar regra de negócio - Ordenação decrescente', () => {",
+              "    const jsonData = pm.response.json();",
+              "    const anoMaisRecente = jsonData.championships[0].year;",
+              "    const anoAnterior = jsonData.championships[1].year;",
+              "    pm.expect(anoMaisRecente).to.be.above(anoAnterior); // 2026 deve ser maior que 2025",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "TC-011 - Buscar Pilotos de Ano Inválido (Isolamento de Dados)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/1886/drivers",
+          "host": ["{{baseUrl}}"],
+          "path": ["1886", "drivers"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('TC-011: Status deve ser 404 Not Found', () => { pm.response.to.have.status(404); });",
+              "pm.test('TC-011: Resposta deve ser um JSON válido', () => { pm.response.to.be.json; });",
+              "pm.test('TC-011: Validar estrutura estrita de erro (Sem vazamento de dados)', () => {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.message).to.eql('No drivers found for this year, try with another one.');",
+              "    pm.expect(jsonData.status).to.eql(404);",
+              "    pm.expect(jsonData).to.not.have.property('drivers');",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "TC-012 - Pesquisar Piloto Inexistente (Validação de Headers)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/drivers/search?q=piloto_que_nao_existe",
+          "host": ["{{baseUrl}}"],
+          "path": ["drivers", "search"],
+          "query": [{ "key": "q", "value": "piloto_que_nao_existe" }]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('TC-012: Status deve ser 404 Not Found', () => { pm.response.to.have.status(404); });",
+              "pm.test('TC-012: Resposta deve ser um JSON válido', () => { pm.response.to.be.json; });",
+              "pm.test('TC-012: Validar Headers de Resposta (Content-Type)', () => {",
+              "    pm.response.to.have.header('Content-Type');",
+              "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+              "});",
+              "pm.test('TC-012: Validar tipo de dado da mensagem de erro', () => {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.message).to.be.a('string');",
+              "});"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
