@@ -1,10 +1,10 @@
 # 🏎️ F1 API Automated Testing — Qualidade de Software
 
-Projeto desenvolvido para a disciplina de **Qualidade de Software** no. O objetivo é implementar uma suíte de 20 testes automatizados de integração na **F1 API** (https://f1api.dev), cobrindo cenários de sucesso e erro.
+Projeto desenvolvido para a disciplina de **Qualidade de Software**. O objetivo é implementar uma suíte de 20 testes automatizados de integração na **F1 API** (https://f1api.dev), cobrindo cenários de sucesso e erro.
 
 ## 👥 Integrantes
 * Henrique Junqueira Bicalho
-* Dougsa Hideaki de Almeida Otani
+* Douglas Hideaki de Almeida Otani
 * Nicholas Lima do Nascimento
 * Otávio Oliveira Jimenez
 * Otávio Augusto Silva Lima
@@ -75,7 +75,7 @@ npm install
 
 ## 📂 Estrutura do Repositório
 ```text
-f1-api-testing/
+testing-api-f1/
 ├── .github/workflows/      # Configuração do GitHub Actions (CI)
 ├── collections/            # Collections do Postman por integrante
 ├── environments/           # Variáveis de ambiente (baseUrl, etc.)
