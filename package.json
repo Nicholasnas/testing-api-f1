@@ -11,8 +11,7 @@
     "test:dev:4-jimenez": "newman run collections/f1api.postman_collection_Otavio_Jimenez.json -e environments/f1api.environment.json",
     "test:dev:5-augusto": "newman run collections/f1api.postman_collection_Otavio_Augusto.json -e environments/f1api.environment.json",
     "test:all": "node run-tests.js",
-    "test:relatorio": "npm run test:all",
-    "test:otavio-jimenez:json": "newman run collections/f1api.postman_collection_Otavio_Jimenez.json -e environments/f1api.environment.json -r cli,json --reporter-json-export relatorio_Otavio_Jimenez.json"
+    "test:relatorio": "npm run test:all"
   },
   "devDependencies": {
     "newman": "^6.2.2",
