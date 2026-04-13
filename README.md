@@ -56,7 +56,7 @@ A suíte está dividida em 10 cenários de sucesso e 10 cenários de erro/invál
 
 ### Instalação
 ```bash
-git clone [https://github.com/Nicholasnas/testing-api-f1](https://github.com/Nicholasnas/testing-api-f1)
+git clone https://github.com/Nicholasnas/testing-api-f1
 cd testing-api-f1
 npm install
 ```
@@ -88,11 +88,7 @@ testing-api-f1/
 
 ## 🤖 Declaração de Uso de IA (Integridade Acadêmica)
 
-Conforme exigido pelo regulamento do projeto, declaramos que ferramentas de Inteligência Artificial foram utilizadas como suporte:
-
-## 🤖 Declaração de Uso de IA (Integridade Acadêmica)
-
-Conforme exigido pelo regulamento do projeto (Item 11), declaramos que ferramentas de Inteligência Artificial (**Google Gemini** e **Claude AI**) foram utilizadas como suporte colaborativo no desenvolvimento deste trabalho:
+Conforme exigido pelo regulamento do projeto, declaramos que ferramentas de Inteligência Artificial (**Google Gemini** e **Claude AI**) foram utilizadas como suporte colaborativo no desenvolvimento deste trabalho:
 
 
 * **Domínio do Código:** O grupo assegura o pleno entendimento de todo o código produzido e das configurações de infraestrutura implementadas, utilizando as ferramentas apenas como apoio à produtividade e revisão.
