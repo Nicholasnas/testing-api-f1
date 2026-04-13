@@ -5,11 +5,11 @@
   "scripts": {
     "test": "npm run test:all",
     "test:dev": "npm-run-all --continue-on-error --sequential test:dev:*",
-    "test:dev:1-henrique": "newman run collections/f1api.postman_collection_Henrique.json -e environments/f1api.environment.json",
-    "test:dev:2-douglas": "newman run collections/f1api.postman_collection_Douglas.json -e environments/f1api.environment.json",
-    "test:dev:3-nicholas": "newman run collections/f1.api.postman_collection_Nicholas.json -e environments/f1api.environment.json",
-    "test:dev:4-jimenez": "newman run collections/f1api.postman_collection_Otavio_Jimenez.json -e environments/f1api.environment.json",
-    "test:dev:5-augusto": "newman run collections/f1api.postman_collection_Otavio_Augusto.json -e environments/f1api.environment.json",
+    "test:dev:henrique": "newman run collections/f1api.postman_collection_Henrique.json -e environments/f1api.environment.json",
+    "test:dev:douglas": "newman run collections/f1api.postman_collection_Douglas.json -e environments/f1api.environment.json",
+    "test:dev:nicholas": "newman run collections/f1.api.postman_collection_Nicholas.json -e environments/f1api.environment.json",
+    "test:dev:jimenez": "newman run collections/f1api.postman_collection_Otavio_Jimenez.json -e environments/f1api.environment.json",
+    "test:dev:augusto": "newman run collections/f1api.postman_collection_Otavio_Augusto.json -e environments/f1api.environment.json",
     "test:all": "node run-tests.js",
     "test:relatorio": "npm run test:all"
   },
